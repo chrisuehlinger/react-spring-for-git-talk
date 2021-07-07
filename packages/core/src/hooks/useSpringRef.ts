@@ -6,4 +6,4 @@ import type { SpringRef as SpringRefType } from '../SpringRef'
 const initSpringRef = () => SpringRef<any>()
 
 export const useSpringRef = <State extends Lookup = Lookup>() =>
-  useState(initSpringRef)[0] as SpringRefType<State>
+    useState(initSpringRef)[0] as SpringRefType<State>

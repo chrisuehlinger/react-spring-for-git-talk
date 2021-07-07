@@ -11,65 +11,65 @@ moving them in accordance to their offsets and speeds.
 import { Parallax, ParallaxLayer } from '@react-spring/parallax'
 
 const Example = () => {
-  const ref = useRef<Parallax>()
-  return (
-    <Parallax ref={ref} pages={3} scrolling={false} horizontal>
-      <ParallaxLayer offset={0} speed={0.5}>
-        <span
-          onClick={() => {
-            ref.current.scrollTo(1)
-          }}>
-          Layers can contain anything
-        </span>
-      </ParallaxLayer>
-    </Parallax>
-  )
+    const ref = useRef<Parallax>()
+    return (
+        <Parallax ref={ref} pages={3} scrolling={false} horizontal>
+            <ParallaxLayer offset={0} speed={0.5}>
+                <span
+                    onClick={() => {
+                        ref.current.scrollTo(1)
+                    }}>
+                    Layers can contain anything
+                </span>
+            </ParallaxLayer>
+        </Parallax>
+    )
 }
 ```
 
 ## `Parallax` props
 
-- `pages: number`
+-   `pages: number`
 
-  Determines the total space of the inner content where each page takes 100% of the visible container.
+    Determines the total space of the inner content where each page takes 100% of the visible container.
 
-- `config?: SpringConfig`
+-   `config?: SpringConfig`
 
-  The spring behavior.
+    The spring behavior.
 
-  Defaults to `config.slow`.
+    Defaults to `config.slow`.
 
-- `scrolling?: boolean`
+-   `scrolling?: boolean`
 
-  Allow content to be scrolled or not.
+    Allow content to be scrolled or not.
 
-  Defaults to `true`.
+    Defaults to `true`.
 
-- `horizontal?: boolean
+-   `horizontal?: boolean
 
-  When `true`, content scrolls from left to right.
+    When `true`, content scrolls from left to right.
 
-  Defaults to `false`.
+    Defaults to `false`.
 
 ## `ParallaxLayer` props
 
-- `factor?: number`
+-   `factor?: number`
 
-  The page size (eg: 1 => 100%, 1.5 => 150%, etc)
+    The page size (eg: 1 => 100%, 1.5 => 150%, etc)
 
-  Defaults to `1`.
+    Defaults to `1`.
 
-- `offset?: number`
+-   `offset?: number`
 
-  The page offset (eg: 0 => top of 1st page, 1 => top of 2nd page, etc)
+    The page offset (eg: 0 => top of 1st page, 1 => top of 2nd page, etc)
 
-  Defaults to `0`.
+    Defaults to `0`.
 
-- `speed?: number`
+-   `speed?: number`
 
-  Shift the layer in accordance to its offset. Values can be positive or negative.
+    Shift the layer in accordance to its offset. Values can be positive or negative.
 
-  Defaults to `0`.
+    Defaults to `0`.
 
 ## Credits
 

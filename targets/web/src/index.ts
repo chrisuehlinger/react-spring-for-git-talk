@@ -8,15 +8,15 @@ import { WithAnimated } from './animated'
 import { primitives } from './primitives'
 
 Globals.assign({
-  batchedUpdates: unstable_batchedUpdates,
-  createStringInterpolator,
-  colors,
+    batchedUpdates: unstable_batchedUpdates,
+    createStringInterpolator,
+    colors,
 })
 
 const host = createHost(primitives, {
-  applyAnimatedValues,
-  createAnimatedStyle: style => new AnimatedStyle(style),
-  getComponentProps: ({ scrollTop, scrollLeft, ...props }) => props,
+    applyAnimatedValues,
+    createAnimatedStyle: style => new AnimatedStyle(style),
+    getComponentProps: ({ scrollTop, scrollLeft, ...props }) => props,
 })
 
 export const animated = host.animated as WithAnimated

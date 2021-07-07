@@ -3,18 +3,18 @@ import { TransitionComponentProps } from '../types'
 import { useTransition } from '../hooks'
 
 export function Transition<
-  Item extends any,
-  Props extends TransitionComponentProps<Item>
+    Item extends any,
+    Props extends TransitionComponentProps<Item>
 >(
-  props:
-    | TransitionComponentProps<Item>
-    | (Props & Valid<Props, TransitionComponentProps<Item, Props>>)
+    props:
+        | TransitionComponentProps<Item>
+        | (Props & Valid<Props, TransitionComponentProps<Item, Props>>)
 ): JSX.Element
 
 export function Transition({
-  items,
-  children,
-  ...props
+    items,
+    children,
+    ...props
 }: TransitionComponentProps<any>) {
-  return useTransition(items, props)(children)
+    return useTransition(items, props)(children)
 }

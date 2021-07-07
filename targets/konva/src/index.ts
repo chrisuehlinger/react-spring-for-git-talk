@@ -4,15 +4,15 @@ import { primitives } from './primitives'
 import { WithAnimated } from './animated'
 
 Globals.assign({
-  createStringInterpolator,
-  colors,
+    createStringInterpolator,
+    colors,
 })
 
 const host = createHost(primitives, {
-  applyAnimatedValues(instance, props) {
-    if (!instance.nodeType) return false
-    instance._applyProps(instance, props)
-  },
+    applyAnimatedValues(instance, props) {
+        if (!instance.nodeType) return false
+        instance._applyProps(instance, props)
+    },
 })
 
 export const animated = host.animated as WithAnimated

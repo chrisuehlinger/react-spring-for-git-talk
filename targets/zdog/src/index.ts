@@ -6,12 +6,12 @@ import { primitives } from './primitives'
 import { WithAnimated } from './animated'
 
 Globals.assign({
-  createStringInterpolator,
-  colors,
+    createStringInterpolator,
+    colors,
 })
 
 const host = createHost(primitives, {
-  applyAnimatedValues: applyProps,
+    applyAnimatedValues: applyProps,
 })
 
 export const animated = host.animated as WithAnimated
