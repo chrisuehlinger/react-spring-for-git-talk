@@ -16,24 +16,24 @@ export class AnimatedObject extends Animated {
     this.setValue(source)
   }
 
-  getValue(animated?: boolean) {
-    const values: Lookup = {}
-    eachProp(this.source, (source, key) => {
-      if (isAnimated(source)) {
-        values[key] = source.getValue(animated)
-      } else if (hasFluidValue(source)) {
-        values[key] = getFluidValue(source)
-      } else if (!animated) {
-        values[key] = source
-      }
-    })
-    return values
+  getValue() {
+    let value = this._string
+    return value == null ? (this._string = this._toString(this._value)) : value
   }
 
-  /** Replace the raw object data */
-  setValue(source: Lookup) {
-    this.source = source
-    this.payload = this._makePayload(source)
+  setValue(value: Value) {
+    if (is.str(value)) {
+      if (value == this._string) {
+        return false
+      }
+      this._string = value
+      this._value = 1
+    } else if (super.setValue(value)) {
+      this._string = null
+    } else {
+      return false
+    }
+    return true
   }
 
   reset() {
