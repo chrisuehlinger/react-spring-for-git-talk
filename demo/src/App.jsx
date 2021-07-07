@@ -27,62 +27,64 @@ import ParallaxVert from './sandboxes/parallax-vert/src/App'
 import ParallaxSticky from './sandboxes/parallax-sticky/src/App'
 
 const links = {
-  card: Card,
-  chain: Chain,
-  'flip-card': FlipCard,
-  'goo-blobs': GooBlobs,
-  slide: Slide,
-  'draggable-list': DraggableList,
-  'cards-stack': CardsStack,
-  viewpager: Viewpager,
-  'simple-transition': SimpleTransition,
-  'image-fade': ImageFade,
-  'list-reordering': ListReordering,
-  masonry: Masonry,
-  'animating-auto': AnimatingAuto,
-  'multistage-transition': MultiStageTransition,
-  trail: Trail,
-  'svg-filter': SvgFilter,
-  'css-keyframes': CssKeyframes,
-  'notification-hub': NotificationHub,
-  tree: Tree,
-  'decay-rocket': DecayRocket,
-  parallax: Parallax,
-  'parallax-vert': ParallaxVert,
-  'parallax-sticky': ParallaxSticky,
+    card: Card,
+    chain: Chain,
+    'flip-card': FlipCard,
+    'goo-blobs': GooBlobs,
+    slide: Slide,
+    'draggable-list': DraggableList,
+    'cards-stack': CardsStack,
+    viewpager: Viewpager,
+    'simple-transition': SimpleTransition,
+    'image-fade': ImageFade,
+    'list-reordering': ListReordering,
+    masonry: Masonry,
+    'animating-auto': AnimatingAuto,
+    'multistage-transition': MultiStageTransition,
+    trail: Trail,
+    'svg-filter': SvgFilter,
+    'css-keyframes': CssKeyframes,
+    'notification-hub': NotificationHub,
+    tree: Tree,
+    'decay-rocket': DecayRocket,
+    parallax: Parallax,
+    'parallax-vert': ParallaxVert,
+    'parallax-sticky': ParallaxSticky,
 }
 
 const Example = ({ link }) => {
-  const Component = links[link]
-  return (
-    <>
-      <Link href="/">
-        {/*eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-        <a className={styles.back}>← Back</a>
-      </Link>
-      <Component />
-    </>
-  )
+    const Component = links[link]
+    return (
+        <>
+            <Link href="/">
+                {/*eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+                <a className={styles.back}>← Back</a>
+            </Link>
+            <Component />
+        </>
+    )
 }
 
 export default function App() {
-  return (
-    <>
-      <Route path="/">
-        <div className={styles.page}>
-          <h1>React Spring demos</h1>
-          <h2>Sandboxes</h2>
-          <div className={styles.linkList}>
-            {Object.keys(links).map(link => (
-              <Link key={link} href={`/${link}`}>
-                {/*eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                <a className={styles.link}>{link}</a>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </Route>
-      <Route path="/:link">{params => <Example link={params.link} />}</Route>
-    </>
-  )
+    return (
+        <>
+            <Route path="/">
+                <div className={styles.page}>
+                    <h1>React Spring demos</h1>
+                    <h2>Sandboxes</h2>
+                    <div className={styles.linkList}>
+                        {Object.keys(links).map(link => (
+                            <Link key={link} href={`/${link}`}>
+                                {/*eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+                                <a className={styles.link}>{link}</a>
+                            </Link>
+                        ))}
+                    </div>
+                </div>
+            </Route>
+            <Route path="/:link">
+                {params => <Example link={params.link} />}
+            </Route>
+        </>
+    )
 }

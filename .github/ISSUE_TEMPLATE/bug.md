@@ -21,5 +21,5 @@ Steps to reproduce the behavior:
 
 ## Environment
 
-- `react-spring` v8.x.x
-- `react` v16.8.x (or `react-native` v0.58.x)
+-   `react-spring` v8.x.x
+-   `react` v16.8.x (or `react-native` v0.58.x)

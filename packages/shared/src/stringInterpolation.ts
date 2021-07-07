@@ -10,7 +10,8 @@ const numberRegex = /[+\-]?(?:0|[1-9]\d*)(?:\.\d*)?(?:[eE][+\-]?\d+)?/g
 
 // Covers rgb, rgba, hsl, hsla
 // Taken from https://gist.github.com/olmokramer/82ccce673f86db7cda5e
-const colorRegex = /(#(?:[0-9a-f]{2}){2,4}|(#[0-9a-f]{3})|(rgb|hsl)a?\((-?\d+%?[,\s]+){2,3}\s*[\d\.]+%?\))/gi
+const colorRegex =
+    /(#(?:[0-9a-f]{2}){2,4}|(#[0-9a-f]{3})|(rgb|hsl)a?\((-?\d+%?[,\s]+){2,3}\s*[\d\.]+%?\))/gi
 
 // Covers color names (transparent, blue, etc.)
 let namedColorRegex: RegExp
@@ -19,7 +20,7 @@ let namedColorRegex: RegExp
 // but we *dont* want to round the opacity (4th column).
 const rgbaRegex = /rgba\(([0-9\.-]+), ([0-9\.-]+), ([0-9\.-]+), ([0-9\.-]+)\)/gi
 const rgbaRound = (_: any, p1: number, p2: number, p3: number, p4: number) =>
-  `rgba(${Math.round(p1)}, ${Math.round(p2)}, ${Math.round(p3)}, ${p4})`
+    `rgba(${Math.round(p1)}, ${Math.round(p2)}, ${Math.round(p3)}, ${p4})`
 
 /**
  * Supports string shapes by extracting numbers so new values can be computed,
@@ -32,45 +33,45 @@ const rgbaRound = (_: any, p1: number, p2: number, p3: number, p4: number) =>
  *     "rotate(0deg) translate(2px, 3px)"  // CSS transforms
  */
 export const createStringInterpolator = (
-  config: InterpolatorConfig<string>
+    config: InterpolatorConfig<string>
 ) => {
-  if (!namedColorRegex)
-    namedColorRegex = G.colors
-      ? // match color names, ignore partial matches
-        new RegExp(`(${Object.keys(G.colors).join('|')})(?!\\w)`, 'g')
-      : // never match
-        /^\b$/
+    if (!namedColorRegex)
+        namedColorRegex = G.colors
+            ? // match color names, ignore partial matches
+              new RegExp(`(${Object.keys(G.colors).join('|')})(?!\\w)`, 'g')
+            : // never match
+              /^\b$/
 
-  // Convert colors to rgba(...)
-  const output = config.output.map(value =>
-    getFluidValue(value)
-      .replace(colorRegex, colorToRgba)
-      .replace(namedColorRegex, colorToRgba)
-  )
+    // Convert colors to rgba(...)
+    const output = config.output.map(value =>
+        getFluidValue(value)
+            .replace(colorRegex, colorToRgba)
+            .replace(namedColorRegex, colorToRgba)
+    )
 
-  // Convert ["1px 2px", "0px 0px"] into [[1, 2], [0, 0]]
-  const keyframes = output.map(value => value.match(numberRegex)!.map(Number))
+    // Convert ["1px 2px", "0px 0px"] into [[1, 2], [0, 0]]
+    const keyframes = output.map(value => value.match(numberRegex)!.map(Number))
 
-  // Convert ["1px 2px", "0px 0px"] into [[1, 0], [2, 0]]
-  const outputRanges = keyframes[0].map((_, i) =>
-    keyframes.map(values => {
-      if (!(i in values)) {
-        throw Error('The arity of each "output" value must be equal')
-      }
-      return values[i]
-    })
-  )
+    // Convert ["1px 2px", "0px 0px"] into [[1, 0], [2, 0]]
+    const outputRanges = keyframes[0].map((_, i) =>
+        keyframes.map(values => {
+            if (!(i in values)) {
+                throw Error('The arity of each "output" value must be equal')
+            }
+            return values[i]
+        })
+    )
 
-  // Create an interpolator for each animated number
-  const interpolators = outputRanges.map(output =>
-    createInterpolator({ ...config, output })
-  )
+    // Create an interpolator for each animated number
+    const interpolators = outputRanges.map(output =>
+        createInterpolator({ ...config, output })
+    )
 
-  // Use the first `output` as a template for each call
-  return (input: number) => {
-    let i = 0
-    return output[0]
-      .replace(numberRegex, () => String(interpolators[i++](input)))
-      .replace(rgbaRegex, rgbaRound)
-  }
+    // Use the first `output` as a template for each call
+    return (input: number) => {
+        let i = 0
+        return output[0]
+            .replace(numberRegex, () => String(interpolators[i++](input)))
+            .replace(rgbaRegex, rgbaRound)
+    }
 }

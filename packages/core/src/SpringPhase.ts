@@ -16,9 +16,9 @@ export const isPaused = (target: any) => (target[$P] & IS_PAUSED) > 0
 
 /** Set the active bit of the `target` phase. */
 export const setActiveBit = (target: any, active: boolean) =>
-  active
-    ? (target[$P] |= IS_ANIMATING | HAS_ANIMATED)
-    : (target[$P] &= ~IS_ANIMATING)
+    active
+        ? (target[$P] |= IS_ANIMATING | HAS_ANIMATED)
+        : (target[$P] &= ~IS_ANIMATING)
 
 export const setPausedBit = (target: any, paused: boolean) =>
-  paused ? (target[$P] |= IS_PAUSED) : (target[$P] &= ~IS_PAUSED)
+    paused ? (target[$P] |= IS_PAUSED) : (target[$P] &= ~IS_PAUSED)
